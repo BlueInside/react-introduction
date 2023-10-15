@@ -1,11 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import Test from './Test';
+import Avatar from './Avatar';
 
 import './index.css';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <Test></Test>
+    <Avatar></Avatar>
   </React.StrictMode>
 );
