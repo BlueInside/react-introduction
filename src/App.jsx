@@ -1,39 +1,28 @@
-import { Children } from 'react';
+function Person() {
+  const [person, setPerson] = useState({ name: 'John', age: 100 });
 
-function Image() {
+  // BAD - Don't do this!
+  const handleIncreaseAge = () => {
+    // mutating the current state object
+    person.age = person.age + 1;
+    setPerson(person);
+  };
+
+  // GOOD - Do this!
+  const handleIncreaseAge = () => {
+    // copy the existing person object into a new object
+    // while updating the age property
+    const newPerson = { ...person, age: person.age + 1 };
+    setPerson(newPerson);
+  };
+
   return (
-    <img
-      className="avatar"
-      src="https://i.imgur.com/OKS67lhm.jpg"
-      alt="Aklilu Lemma"
-      width={70}
-      height={70}
-    />
-  );
-}
-function Card({ title, children }) {
-  return (
-    <div className="card">
-      <div className="card-content">
-        <h1>{title}</h1>
-        {children}
-      </div>
-    </div>
+    <>
+      <h1>{person.name}</h1>
+      <h2>{person.age}</h2>
+      <button onClick={handleIncreaseAge}>Increase age</button>
+    </>
   );
 }
 
-export default function Profile() {
-  return (
-    <div>
-      <Card title="photo">
-        <Image />
-      </Card>
-      <Card title="about">
-        <p>
-          Aklilu Lemma was a distinguished Ethiopian scientist who discovered a
-          natural treatment to schistosomiasis.
-        </p>
-      </Card>
-    </div>
-  );
-}
+export default Person;
