@@ -1,69 +1,39 @@
-import { getImageUrl } from './utils.js';
+import { Children } from 'react';
 
-const scientists = [
-  {
-    name: 'Maria Skłodowska-Curie',
-    imageUrl: 'szV5sdG',
-    profession: 'physicist and chemist',
-    awards: [
-      'Nobel Prize in Physics',
-      'Nobel Prize in Chemistry',
-      'Davy Medal',
-      'Matteucci Medal',
-    ],
-    discovered: 'polonium (chemical element)',
-  },
-  {
-    name: 'Katsuko Saruhashi',
-    imageUrl: 'YfeOqp2',
-    profession: 'geochemist',
-    awards: ['Miyake Prize for geochemistry', 'Tanaka Prize'],
-    discovered: 'a method for measuring carbon dioxide in seawater',
-  },
-];
-
-function Profile({ fullname, size, imageUrl, profession, awards, discovered }) {
+function Image() {
   return (
-    <section className="profile">
-      <h2>{fullname}</h2>
-      <img
-        className="avatar"
-        src={getImageUrl(`${imageUrl}`)}
-        alt={`${fullname}`}
-        width={size}
-        height={size}
-      />
-      <ul>
-        <li>
-          <b>Profession: </b>
-          {profession}
-        </li>
-        <li>
-          <b>Awards: {awards.length} </b>
-          {awards.map((award, index) => (
-            <span key={index}>{award}, </span>
-          ))}
-        </li>
-        <li>
-          <b>Discovered: </b>
-          {discovered}
-        </li>
-      </ul>
-    </section>
+    <img
+      className="avatar"
+      src="https://i.imgur.com/OKS67lhm.jpg"
+      alt="Aklilu Lemma"
+      width={70}
+      height={70}
+    />
+  );
+}
+function Card({ title, children }) {
+  return (
+    <div className="card">
+      <div className="card-content">
+        <h1>{title}</h1>
+        {children}
+      </div>
+    </div>
   );
 }
 
-Profile.defaultProps = {
-  size: 70,
-};
-
-export default function Gallery() {
+export default function Profile() {
   return (
     <div>
-      <h1>Notable Scientists</h1>
-      {scientists.map((scientist) => (
-        <Profile key={scientist.fullname} {...scientist} />
-      ))}
+      <Card title="photo">
+        <Image />
+      </Card>
+      <Card title="about">
+        <p>
+          Aklilu Lemma was a distinguished Ethiopian scientist who discovered a
+          natural treatment to schistosomiasis.
+        </p>
+      </Card>
     </div>
   );
 }
